@@ -1,0 +1,146 @@
+{
+	"folders": [
+		{
+			"path": "STM32"
+		},
+		{
+			"path": "ESP32"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"fonts.h": "c",
+			"stm32f1xx_hal.h": "c",
+			"uart.h": "c",
+			"key.h": "c",
+			"display.h": "c",
+			"cmsis_os.h": "c",
+			"freertos.h": "c",
+			"queue.h": "c",
+			"stm32freertos.h": "c",
+			"portable.h": "c",
+			"portmacro.h": "c",
+			"adc.h": "c"
+		},
+		"stm32-for-vscode.openOCDPath": "/Users/azuby/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/openocd/0.12.0-1.1/.content/bin/openocd",
+		"stm32-for-vscode.armToolchainPath": "/Users/azuby/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/12.2.1-1.2.1/.content/bin",
+		"cortex-debug.armToolchainPath": "/Users/azuby/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/12.2.1-1.2.1/.content/bin",
+		"cortex-debug.openocdPath": "/Users/azuby/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/openocd/0.12.0-1.1/.content/bin/openocd"
+	},
+	"tasks": {
+		"tasks": [
+			{
+				"label": "Build STM",
+				"type": "process",
+				"command": "${command:stm32-for-vscode.build}",
+				"options": {
+					"cwd": "${workspaceRoot}"
+				},
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"problemMatcher": [
+					"$gcc"
+				]
+			},
+			{
+				"label": "Build Clean STM",
+				"type": "process",
+				"command": "${command:stm32-for-vscode.cleanBuild}",
+				"options": {
+					"cwd": "${workspaceRoot}"
+				},
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"problemMatcher": [
+					"$gcc"
+				]
+			},
+			{
+				"label": "Flash STM",
+				"type": "process",
+				"command": "${command:stm32-for-vscode.flash}",
+				"options": {
+					"cwd": "${workspaceRoot}"
+				},
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"problemMatcher": [
+					"$gcc"
+				]
+			}
+		]
+	},
+	"launch": {
+		"configurations": [
+			{
+				"type": "platformio-debug",
+				"request": "launch",
+				"name": "PIO Debug",
+				"executable": "/Users/azuby/Documents/DoAnII.nosync/STM32/.pio/build/genericSTM32F103C8/firmware.elf",
+				"projectEnvName": "genericSTM32F103C8",
+				"toolchainBinDir": "/Users/azuby/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+				"internalConsoleOptions": "openOnSessionStart",
+				"svdPath": "/Users/azuby/.platformio/platforms/ststm32/misc/svd/STM32F103xx.svd",
+				"preLaunchTask": {
+					"type": "PlatformIO",
+					"task": "Pre-Debug"
+				}
+			},
+			{
+				"type": "platformio-debug",
+				"request": "launch",
+				"name": "PIO Debug (skip Pre-Debug)",
+				"executable": "/Users/azuby/Documents/DoAnII.nosync/STM32/.pio/build/genericSTM32F103C8/firmware.elf",
+				"projectEnvName": "genericSTM32F103C8",
+				"toolchainBinDir": "/Users/azuby/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+				"internalConsoleOptions": "openOnSessionStart",
+				"svdPath": "/Users/azuby/.platformio/platforms/ststm32/misc/svd/STM32F103xx.svd"
+			},
+			{
+				"type": "platformio-debug",
+				"request": "launch",
+				"name": "PIO Debug (without uploading)",
+				"executable": "/Users/azuby/Documents/DoAnII.nosync/STM32/.pio/build/genericSTM32F103C8/firmware.elf",
+				"projectEnvName": "genericSTM32F103C8",
+				"toolchainBinDir": "/Users/azuby/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+				"internalConsoleOptions": "openOnSessionStart",
+				"svdPath": "/Users/azuby/.platformio/platforms/ststm32/misc/svd/STM32F103xx.svd",
+				"loadMode": "manual"
+			},
+			{
+				"showDevDebugOutput": "parsed",
+				"cwd": "${workspaceRoot}",
+				"executable": "./build/.elf",
+				"name": "Debug STM32",
+				"request": "launch",
+				"type": "cortex-debug",
+				"servertype": "openocd",
+				"preLaunchTask": "Build STM",
+				"device": "",
+				"configFiles": [
+					"openocd.cfg"
+				]
+			},
+			{
+				"showDevDebugOutput": "parsed",
+				"cwd": "${workspaceRoot}",
+				"executable": "./build/.elf",
+				"name": "Attach STM32",
+				"request": "attach",
+				"type": "cortex-debug",
+				"servertype": "openocd",
+				"preLaunchTask": "Build STM",
+				"device": "",
+				"configFiles": [
+					"openocd.cfg"
+				]
+			}
+		]
+	}
+}
