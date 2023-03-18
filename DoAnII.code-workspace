@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "ESP32"
+		},
+		{
+			"path": "SERVER"
 		}
 	],
 	"settings": {

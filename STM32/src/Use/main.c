@@ -158,7 +158,7 @@ void callBackMain() {
 			// SSD1306_Puts((char *)numberToString(failul), &Font_7x10, SSD1306_COLOR_WHITE);
 		}
 		
-		if (HAL_GetTick() - time2 > 1200) {
+		if (HAL_GetTick() - time2 > 2000) {
 			transmitInterval();
 			
 			time2 = HAL_GetTick();
@@ -234,7 +234,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	//HAL_Delay(2000); // Wait for DHT22 ready (>1s)
-	
+
   while (1)
   {	
 
