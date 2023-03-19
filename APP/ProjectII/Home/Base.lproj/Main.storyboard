@@ -162,7 +162,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="Black"/>
+                        <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="W2p-ri-C3P" firstAttribute="width" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-68" id="6oP-cx-Qt8"/>
                             <constraint firstItem="hGq-1N-QCA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8mf-Jh-RDv"/>

@@ -105,7 +105,7 @@ void DHT_ReadTempHum(DHT_Name* DHT)
 	}		
 	uint16_t timeOut = HAL_GetTick();
 	while(DHT_ReadPin(DHT)){
-		if (HAL_GetTick() - timeOut > 1000) {
+		if (HAL_GetTick() - timeOut > 100) {
 			DHT->Status = 0;
 			return;
 		}

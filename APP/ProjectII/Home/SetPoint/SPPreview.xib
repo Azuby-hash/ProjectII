@@ -12,27 +12,8 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4L-bs-bsH">
-                    <rect key="frame" x="350" y="280" width="100" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="100" id="PQe-tB-V0h"/>
-                        <constraint firstAttribute="height" constant="40" id="bam-7M-ciZ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="b:" destination="-1" eventType="touchUpInside" id="xrq-7H-nCH"/>
-                    </connections>
-                </button>
-            </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <constraints>
-                <constraint firstItem="g4L-bs-bsH" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="2Da-r2-9dP"/>
-                <constraint firstItem="g4L-bs-bsH" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="BMD-nv-hgq"/>
-            </constraints>
             <point key="canvasLocation" x="132" y="60"/>
         </view>
     </objects>

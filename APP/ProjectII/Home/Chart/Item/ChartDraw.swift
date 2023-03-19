@@ -79,7 +79,7 @@ class ChartDraw: UIView {
         path.addLine(to: CGPoint(x: bounds.width - INSET, y: bounds.height - INSET))
         
         xyLine.path = path.cgPath.copy(strokingWithWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0)
-        xyLine.fillColor = UIColor.white.cgColor
+        xyLine.fillColor = UIColor.black.cgColor
         
         path.removeAllPoints()
         
@@ -96,7 +96,7 @@ class ChartDraw: UIView {
         path.addLine(to: CGPoint(x: bounds.width - (INSET + 10), y: bounds.height - (INSET - 5)))
 
         arrowLine.path = path.cgPath
-        arrowLine.fillColor = UIColor.white.cgColor
+        arrowLine.fillColor = UIColor.black.cgColor
     }
     
     func drawValue() {
@@ -191,7 +191,7 @@ class ChartDraw: UIView {
         }
         
         chartDot.path = path.cgPath.copy(strokingWithWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0)
-        chartDot.fillColor = UIColor._white.cgColor
+        chartDot.fillColor = UIColor._black.cgColor
     }
     
     private func getX(_ value: CGFloat, _ range: ClosedRange<CGFloat>) -> CGFloat {

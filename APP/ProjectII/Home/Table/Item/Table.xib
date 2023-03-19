@@ -50,11 +50,11 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0up-NY-3QY">
                                     <rect key="frame" x="20" y="9" width="40" height="19"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <color key="textColor" name="White"/>
+                                    <color key="textColor" name="Black"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.20141327506178744" alpha="0.79795660940157309" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.79704480112849418" alpha="0.79795660940157309" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="0up-NY-3QY" firstAttribute="centerY" secondItem="yDV-55-H13" secondAttribute="centerY" id="BvB-Uh-t1M"/>
                                 <constraint firstAttribute="height" constant="36" id="g8H-Ru-gfc"/>
@@ -89,6 +89,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Purple">
             <color red="0.47499999403953552" green="0.41600000858306885" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

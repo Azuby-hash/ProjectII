@@ -42,7 +42,7 @@ void setup() {
 
 // To stm32
 void backSetpoint() {
-  String req = "http://" + server + "/espGet";
+  String req = "http://" + server + "/get";
 
   String reqTempString = "{\"type\": \"Temp\", \"isSP\": true,\"password\":\"" + serverPassword + "\" }";
   String reqAirString = "{\"type\": \"Air\", \"isSP\": true,\"password\":\"" + serverPassword + "\" }";
@@ -69,7 +69,9 @@ void backSetpoint() {
     }
     Serial.print(msg);
 
+    digitalWrite(LED_ON_ACTIVE, LOW);
     delay(2000);
+    digitalWrite(LED_ON_ACTIVE, HIGH);
   }
 
   if (stof(resAirString.c_str()) > 2 && abs(airSPCurr - stof(resAirString.c_str())) > 0.9) {
@@ -78,7 +80,10 @@ void backSetpoint() {
       SerialPort.write(msg[i]);
     }
     Serial.print(msg);
+    
+    digitalWrite(LED_ON_ACTIVE, LOW);
     delay(2000);
+    digitalWrite(LED_ON_ACTIVE, HIGH);
   }
 
   if (stof(resHumiString.c_str()) > 2 && abs(humiSPCurr - stof(resHumiString.c_str())) > 0.9) {
@@ -88,7 +93,9 @@ void backSetpoint() {
     }
     Serial.print(msg);
 
+    digitalWrite(LED_ON_ACTIVE, LOW);
     delay(2000);
+    digitalWrite(LED_ON_ACTIVE, HIGH);
   }
 
   if (stof(resLightString.c_str()) > 2 && abs(lightSPCurr - stof(resLightString.c_str())) > 0.9) {
@@ -97,6 +104,10 @@ void backSetpoint() {
       SerialPort.write(msg[i]);
     }
     Serial.print(msg);
+
+    digitalWrite(LED_ON_ACTIVE, LOW);
+    delay(2000);
+    digitalWrite(LED_ON_ACTIVE, HIGH);
   }
 }
 
@@ -114,7 +125,7 @@ void postValue() {
   humiSPCurr = stmJSON["HumiSP"].as<float>();
   lightSPCurr = stmJSON["LightSP"].as<float>();
 
-  String req = "http://" + server + "/espPost";
+  String req = "http://" + server + "/post";
 
   String reqTempString = "{\"type\": \"Temp\",\"value\":" + String(stmJSON["Temp"].as<float>()) + ", \"isSP\": false,\"password\":\"" + serverPassword + "\" }";
   String reqAirString = "{\"type\": \"Air\",\"value\":" + String(stmJSON["Air"].as<float>()) + ", \"isSP\": false,\"password\":\"" + serverPassword + "\" }";
@@ -141,7 +152,7 @@ void postSetpoint() {
   humiSPCurr = stmJSON["HumiSP"].as<float>();
   lightSPCurr = stmJSON["LightSP"].as<float>();
 
-  String req = "http://" + server + "/espPost";
+  String req = "http://" + server + "/post";
 
   String reqTempString = "{\"type\": \"Temp\",\"value\":" + String(tempSPCurr) + ", \"isSP\": true,\"password\":\"" + serverPassword + "\" }";
   String reqAirString = "{\"type\": \"Air\",\"value\":" + String(airSPCurr) + ", \"isSP\": true,\"password\":\"" + serverPassword + "\" }";

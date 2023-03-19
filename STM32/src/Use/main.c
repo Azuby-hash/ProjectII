@@ -164,7 +164,7 @@ void callBackMain() {
 			time2 = HAL_GetTick();
 		}
     
-    if (HAL_GetTick() - time4 > 800) {
+    if (HAL_GetTick() - time4 > 400) {
       receiveInterval();
 	
   		time4 = HAL_GetTick();

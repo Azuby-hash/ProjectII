@@ -21,7 +21,7 @@
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="temp" translatesAutoresizingMaskIntoConstraints="NO" id="F5M-MN-RUV" userLabel="Temp" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609980000006" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>
@@ -31,7 +31,7 @@
                                 </view>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="humi" translatesAutoresizingMaskIntoConstraints="NO" id="V2t-Cz-Rix" userLabel="Humi" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="200" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609980000006" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>
@@ -46,7 +46,7 @@
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="air" translatesAutoresizingMaskIntoConstraints="NO" id="IHW-gI-fv6" userLabel="Air" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609980000006" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>
@@ -56,7 +56,7 @@
                                 </view>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="light" translatesAutoresizingMaskIntoConstraints="NO" id="MAU-Gy-5Kt" userLabel="Light" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="200" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609980000006" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>

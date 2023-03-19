@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Nhận giá trị truyền
-app.post(`/espPost`, (req, res) => {
+app.post(`/post`, (req, res) => {
     const value = req.body.value // Giá trị truyền
     const type = req.body.type // Type
     const isSP = req.body.isSP // Giá trị truyền là `Setpoint` hay `Value`
@@ -62,7 +62,7 @@ app.post(`/espPost`, (req, res) => {
 });
 
 // Trả giá trị
-app.post('/espGet', (req, res) => {
+app.post('/get', (req, res) => {
     const pass = req.body.password // Mật khẩu xác minh
 
     if (pass == password) {
@@ -103,7 +103,7 @@ app.post('/espGet', (req, res) => {
     }
 })
 
-app.post('/espConfig', (req, res) => {
+app.post('/config', (req, res) => {
     const pass = req.body.password // Mật khẩu xác minh
     
     if (pass == password) { 

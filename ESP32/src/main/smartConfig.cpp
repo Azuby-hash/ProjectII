@@ -5,9 +5,9 @@
 
 String server;
 
-RTC_DATA_ATTR uint8_t rvd_data[33] = "192.168.1.86:3000"; // IP server
-RTC_DATA_ATTR uint8_t ssid[33] = "Tang 2"; // Ten WiFi
-RTC_DATA_ATTR uint8_t password[65] = "long12345"; // Password Wifi
+RTC_DATA_ATTR uint8_t rvd_data[33] = { 0 }; // IP server
+RTC_DATA_ATTR uint8_t ssid[33] = { 0 }; // Ten WiFi
+RTC_DATA_ATTR uint8_t password[65] = { 0 }; // Password Wifi
 
 String serverPassword = "9797964a-2f5c-41c6-91c1-44aa68308631";
 
@@ -92,7 +92,7 @@ void serverHostConfig() {
   Serial.println(ip);
 
   // Request để test xem IP gửi về rvd_data có đúng không
-  String rq = "http://" + ip + "/espConfig";
+  String rq = "http://" + ip + "/config";
   String res = httpPOSTRequest(rq, "{\"password\":\"" + serverPassword + "\"}");
 
   if (res == serverPassword) {
@@ -124,36 +124,36 @@ void wifiSmartConfig() {
   WiFi.mode(WIFI_AP_STA);
   WiFi.onEvent(wiFiEvent);
 
-  // // Kiểm tra xem tên và pass WiFi có lưu trong bộ nhớ RTC(sleep and wake) không
-  // if (ssid[0] != '\0' || password[0] != '\0') {
-  //   // Nếu có thì thử kết nối trong 3s, nếu 3s không kết nối đc thì bắt đầu smart config
-  //   WiFi.begin((char *)ssid, (char *)password);
-  //   while (_time3 < 8000) {
-  //     if (WiFi.status() == WL_CONNECTED) {
-  //       delay(500);
-  //       serverHostConfig();
-  //       return;
-  //     }
-  //     _time3 += 500;
-  //     delay(500);
-  //     Serial.print(".");
-  //   }
-  //   digitalWrite(LED_ON_ACTIVE, LOW);
-  //   return;
-  // }
-  // // Nếu không thì smart config
+  // Kiểm tra xem tên và pass WiFi có lưu trong bộ nhớ RTC(sleep and wake) không
+  if (ssid[0] != '\0' || password[0] != '\0') {
+    // Nếu có thì thử kết nối trong 3s, nếu 3s không kết nối đc thì bắt đầu smart config
+    WiFi.begin((char *)ssid, (char *)password);
+    while (_time3 < 8000) {
+      if (WiFi.status() == WL_CONNECTED) {
+        delay(500);
+        serverHostConfig();
+        return;
+      }
+      _time3 += 500;
+      delay(500);
+      Serial.print(".");
+    }
+    digitalWrite(LED_ON_ACTIVE, LOW);
+    return;
+  }
+  // Nếu không thì smart config
 
-  // /* start SmartConfig */
-  // WiFi.beginSmartConfig(SC_TYPE_ESPTOUCH_V2, (char *)"0000000000000000");
+  /* start SmartConfig */
+  WiFi.beginSmartConfig(SC_TYPE_ESPTOUCH_V2, (char *)"0000000000000000");
  
-  // /* Wait for SmartConfig packet from mobile */
-  // Serial.println("Waiting for SmartConfig.");
-  // while (!WiFi.smartConfigDone()) {
-  //   delay(500);
-  //   Serial.print(".");
-  // }
-  // Serial.println("");
-  // Serial.println("SmartConfig done.");
+  /* Wait for SmartConfig packet from mobile */
+  Serial.println("Waiting for SmartConfig.");
+  while (!WiFi.smartConfigDone()) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("SmartConfig done.");
  
   WiFi.begin((char *)ssid,(char *)password);
 

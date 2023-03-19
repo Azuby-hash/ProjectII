@@ -21,7 +21,7 @@
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="temp" translatesAutoresizingMaskIntoConstraints="NO" id="lHH-wR-hVB" userLabel="Temp" customClass="Chart" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609977562109" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.8952811031074791" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>
@@ -31,7 +31,7 @@
                                 </view>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="humi" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-cM-G5n" userLabel="Humi" customClass="Chart" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="200" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609977562109" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.8952811031074791" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>
@@ -46,7 +46,7 @@
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="air" translatesAutoresizingMaskIntoConstraints="NO" id="TNG-S8-NgR" userLabel="Air" customClass="Chart" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609977562109" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.8952811031074791" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>
@@ -56,7 +56,7 @@
                                 </view>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="light" translatesAutoresizingMaskIntoConstraints="NO" id="jAX-LM-aqx" userLabel="Light" customClass="Chart" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="200" width="300" height="160"/>
-                                    <color key="backgroundColor" white="0.099935609977562109" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.8952811031074791" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="12"/>
