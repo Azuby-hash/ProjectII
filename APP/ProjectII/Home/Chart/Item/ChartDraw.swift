@@ -179,19 +179,17 @@ class ChartDraw: UIView {
                                      startAngle: 0, endAngle: .pi * 2, clockwise: true))
             popup(value: values.first, souceP: sourceP)
         } else if let point = point {
-            for value in values {
-                if value == getValueBy(point, timeRange: timeRange) {
-                    sourceP = CGPoint(x: getX(value.getDate().timeIntervalSince1970, timeRange),
-                                      y: getY(value.getValue(), valueRange))
-                    path.append(UIBezierPath(arcCenter: sourceP, radius: 7,
-                                             startAngle: 0, endAngle: .pi * 2, clockwise: true))
-                    popup(value: value, souceP: sourceP)
-                }
+            if let value = getValueBy(point, timeRange: timeRange) {
+                sourceP = CGPoint(x: getX(value.getDate().timeIntervalSince1970, timeRange),
+                                  y: getY(value.getValue(), valueRange))
+                path.append(UIBezierPath(arcCenter: sourceP, radius: 7,
+                                         startAngle: 0, endAngle: .pi * 2, clockwise: true))
+                popup(value: value, souceP: sourceP)
             }
         }
         
         chartDot.path = path.cgPath.copy(strokingWithWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0)
-        chartDot.fillColor = UIColor._black.cgColor
+        chartDot.fillColor = UIColor._white.cgColor
     }
     
     private func getX(_ value: CGFloat, _ range: ClosedRange<CGFloat>) -> CGFloat {

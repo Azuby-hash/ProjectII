@@ -19,7 +19,7 @@ class SPPreview: UIView {
         commonInit()
     }
     @IBAction func b(_ sender: Any) {
-        ModelManager.shared.getStorage().setSetPoint(of: "temp", CGFloat.random(in: 0...100))
+        
     }
     
     private func commonInit() {

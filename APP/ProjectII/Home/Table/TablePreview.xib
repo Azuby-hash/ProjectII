@@ -19,7 +19,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="aT7-dn-P2X" customClass="UIStackViewForwardPointSubview" customModule="ProjectII" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
                             <subviews>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="temp" translatesAutoresizingMaskIntoConstraints="NO" id="F5M-MN-RUV" userLabel="Temp" customClass="Table" customModule="ProjectII" customModuleProvider="target">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Temp" translatesAutoresizingMaskIntoConstraints="NO" id="F5M-MN-RUV" userLabel="Temp" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
                                     <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
@@ -29,7 +29,7 @@
                                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerCurve" value="continuous"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="humi" translatesAutoresizingMaskIntoConstraints="NO" id="V2t-Cz-Rix" userLabel="Humi" customClass="Table" customModule="ProjectII" customModuleProvider="target">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Humi" translatesAutoresizingMaskIntoConstraints="NO" id="V2t-Cz-Rix" userLabel="Humi" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="200" width="300" height="160"/>
                                     <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
@@ -44,7 +44,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="L59-0G-f5s" customClass="UIStackViewForwardPointSubview" customModule="ProjectII" customModuleProvider="target">
                             <rect key="frame" x="340" y="0.0" width="300" height="360"/>
                             <subviews>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="air" translatesAutoresizingMaskIntoConstraints="NO" id="IHW-gI-fv6" userLabel="Air" customClass="Table" customModule="ProjectII" customModuleProvider="target">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Air" translatesAutoresizingMaskIntoConstraints="NO" id="IHW-gI-fv6" userLabel="Air" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
                                     <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
@@ -54,7 +54,7 @@
                                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerCurve" value="continuous"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="light" translatesAutoresizingMaskIntoConstraints="NO" id="MAU-Gy-5Kt" userLabel="Light" customClass="Table" customModule="ProjectII" customModuleProvider="target">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Light" translatesAutoresizingMaskIntoConstraints="NO" id="MAU-Gy-5Kt" userLabel="Light" customClass="Table" customModule="ProjectII" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="200" width="300" height="160"/>
                                     <color key="backgroundColor" white="0.89893350234642266" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>

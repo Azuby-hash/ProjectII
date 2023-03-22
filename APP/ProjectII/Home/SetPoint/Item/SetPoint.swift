@@ -64,9 +64,9 @@ class SetPoint: UIView {
     @objc func transformer(_ noti: Notification) {
         guard let index = noti.object as? Int else { return }
         
-        UIView.animate(withDuration: 0.25, delay: index == 1 ? 0.25 : 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction) { [self] in
-            transform = index == 1 ? .identity : .identity.scaledBy(x: 0.3, y: 0.3)
-            alpha = index == 1 ? 1 : 0
+        UIView.animate(withDuration: 0.25, delay: index == 2 ? 0.25 : 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction) { [self] in
+            transform = index == 2 ? .identity : .identity.scaledBy(x: 0.3, y: 0.3)
+            alpha = index == 2 ? 1 : 0
             
             superview?.layoutIfNeeded()
         }
@@ -74,19 +74,19 @@ class SetPoint: UIView {
     
     @objc func update() {
         if let id = restorationIdentifier,
-           let temp = ModelManager.shared.getStorage().getStorage(of: id)?.getValue() {
+           let temp = ModelManager.shared.getStorage().getStorage(of: id).getValue() {
             let value = model.getValue()
             isHidden = false
             
-            let date = temp.getDate()
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm:ss"
             
             let formatter2 = DateFormatter()
             formatter2.dateFormat = "dd-MM-yyyy"
             
-            line1.text = "ESP\(Int(id)! + 1): \(temp.getValue())\(temp.getCol().getUnit()) at \(formatter.string(from: date)) \(formatter2.string(from: date))"
-            line2.text = "Threshold cross: \(temp.getValue() > value)"
+            line1.text = "\(id): \(temp.getValue())\(temp.getCol().getUnit())"
+            line2.text = temp.getValue() > value ? "Over Threshold" : "In Safe"
+            line2.textColor = temp.getValue() > value ? ._red : ._black
             
             curSP.text = "\(value)"
         } else {

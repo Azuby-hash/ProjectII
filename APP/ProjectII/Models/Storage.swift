@@ -8,191 +8,84 @@
 import UIKit
 
 class Storage {
-    private var temp: StorageValueCollection = .init(name: "Temperature", unit: "ºC")
-    private var air: StorageValueCollection = .init(name: "Air", unit: "%")
-    private var humi: StorageValueCollection = .init(name: "Humidity", unit: "%")
-    private var light: StorageValueCollection = .init(name: "Light", unit: "Lux")
     
-    private var tempSP: StorageSetPoint = .init()
-    private var airSP: StorageSetPoint = .init()
-    private var humiSP: StorageSetPoint = .init()
-    private var lightSP: StorageSetPoint = .init()
+    enum ValueType: String {
+        case temp = "Temp"
+        case air = "Air"
+        case humi = "Humi"
+        case light = "Light"
+    }
     
-    private var lastDescriptEntry = 0
+    private var temp: StorageValueCollection = .init(name: "Temperature", unit: "ºC", type: .temp)
+    private var air: StorageValueCollection = .init(name: "Air", unit: "%", type: .air)
+    private var humi: StorageValueCollection = .init(name: "Humidity", unit: "%", type: .humi)
+    private var light: StorageValueCollection = .init(name: "Light", unit: "Lux", type: .light)
     
-    func descriptObject(_ object: ModelJSON) {
-        lastDescriptEntry = object.channel.last_entry_id
-        
-        let feeds = object.feeds.sorted(by: { feeda, feedb in
-            return feeda.entry_id < feedb.entry_id
-        })
-        
-        for feed in feeds {
-            var dateString = feed.created_at.replacingOccurrences(of: "T", with: " ")
-            dateString.removeLast()
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            
-            if let string = feed.field1,
-               let value = Double(string),
-               let date = dateFormatter.date(from: dateString)
-            {
-                temp.appendValue(value: value, date: date, entry: feed.entry_id)
-            }
-            
-            if let string = feed.field2,
-               let value = Double(string),
-               let date = dateFormatter.date(from: dateString)
-            {
-                air.appendValue(value: value, date: date, entry: feed.entry_id)
-            }
-            
-            if let string = feed.field3,
-               let value = Double(string),
-               let date = dateFormatter.date(from: dateString)
-            {
-                humi.appendValue(value: value, date: date, entry: feed.entry_id)
-            }
-            
-            if let string = feed.field4,
-               let value = Double(string),
-               let date = dateFormatter.date(from: dateString)
-            {
-                light.appendValue(value: value, date: date, entry: feed.entry_id)
-            }
-            
-            if let string = feed.field5,
-               let value = Double(string)
-            {
-                tempSP.setValue(value)
-            }
-            
-            if let string = feed.field6,
-               let value = Double(string)
-            {
-                airSP.setValue(value)
-            }
-            
-            if let string = feed.field7,
-               let value = Double(string)
-            {
-                humiSP.setValue(value)
-            }
-            
-            if let string = feed.field8,
-               let value = Double(string)
-            {
-                lightSP.setValue(value)
+    private var tempSP: StorageSetPoint = .init(type: .temp)
+    private var airSP: StorageSetPoint = .init(type: .air)
+    private var humiSP: StorageSetPoint = .init(type: .humi)
+    private var lightSP: StorageSetPoint = .init(type: .light)
+    
+    // Tách dữ liệu vào các biến chứa
+    func descriptObject(_ object: [String: [Feed]]) {
+        for key in object.keys {
+            if (!key.contains("SP")) {
+                getStorage(of: key).setValues(object[key]!.map({ feed in
+                    return StorageValue(value: feed.value, date: Date(timeIntervalSince1970: feed.date), col: getStorage(of: key))
+                }))
+            } else {
+                if let values = object[key] {
+                    let sortValues = values.sorted { f1, f2 in
+                        return f1.date < f2.date
+                    }
+                    
+                    if let value = sortValues.last?.value {
+                        getSetPoint(of: String(key.dropLast(2))).setValue(value)
+                    }
+                }
             }
         }
     }
     
-    func setPointCheck(_ object: ModelJSON) {
-        if object.channel.last_entry_id <= lastDescriptEntry {
-            ModelManager.shared.fetch(4.2)
-            return
-        }
-        let feeds = object.feeds.filter({ feed in
-            return feed.entry_id > lastDescriptEntry
-        }).sorted(by: { feeda, feedb in
-            return feeda.entry_id < feedb.entry_id
-        })
-        for feed in feeds {
-            if let string = feed.field5,
-               let value = Double(string),
-               abs(value - tempSP.getValue()) < 0.01
-            {
-                acceptChange()
-                return
-            }
-            
-            if let string = feed.field6,
-               let value = Double(string),
-                abs(value - airSP.getValue()) < 0.01
-             {
-                acceptChange()
-                return
-             }
-            
-            if let string = feed.field7,
-               let value = Double(string),
-                abs(value - humiSP.getValue()) < 0.01
-             {
-                acceptChange()
-                return
-             }
-            
-            if let string = feed.field8,
-               let value = Double(string),
-                abs(value - lightSP.getValue()) < 0.01
-             {
-                acceptChange()
-                return
-             }
-        }
-        ModelManager.shared.fetch(4.2)
+    func getAllStorage() -> [StorageValueCollection] {
+        return [temp, air, humi, light]
     }
     
-    private func acceptChange() {
-        ModelManager.shared.isFetchEnable = true
-        ModelManager.shared.fetch()
+    func getAllSetPoint() -> [StorageSetPoint] {
+        return [tempSP, airSP, humiSP, lightSP]
     }
     
-    func getStorage(of value: String) -> StorageValueCollection? {
-        let model = [
-            "temp": temp,
-            "air": air,
-            "humi": humi,
-            "light": light
-        ]
-        
-        return model[value]
+    func getStorage(of type: String) -> StorageValueCollection {
+        return [temp, air, humi, light].first { col in
+            return col.getType() == .init(rawValue: type)!
+        } ?? temp
     }
     
-    func getSetPoint(of value: String) -> StorageSetPoint? {
-        let model = [
-            "temp": tempSP,
-            "air": airSP,
-            "humi": humiSP,
-            "light": lightSP
-        ]
-        
-        return model[value]
+    func getSetPoint(of type: String) -> StorageSetPoint {
+        return [tempSP, airSP, humiSP, lightSP].first { col in
+            return col.getType() == .init(rawValue: type)!
+        } ?? tempSP
     }
     
-    func setSetPoint(of value: String, _ sp: CGFloat) {
-        let model = [
-            "temp": { [self] in
-                tempSP.setValue(sp)
-            },
-            "air": { [self] in
-                airSP.setValue(sp)
-            },
-            "humi": { [self] in
-                humiSP.setValue(sp)
-            },
-            "light": { [self] in
-                lightSP.setValue(sp)
-            }
-        ]
-        
-        if let c = model[value] {
-            ModelManager.shared.isFetchEnable = false
-            c()
-            ModelManager.shared.post(tempSP.getValue(), airSP.getValue(), humiSP.getValue(), lightSP.getValue())
-        }
+    func getCount() -> Int {
+        return 4
+    }
+    
+    func setSetPoint(of type: String, _ sp: CGFloat) {
+        ModelManager.shared.post((type, sp))
     }
 }
 
 class StorageValueCollection {
     private var values: [StorageValue] = []
-    private var name: String = ""
-    private var unit: String = ""
+    private var name: String
+    private var unit: String
+    private var type: Storage.ValueType
     
-    init(name: String, unit: String) {
+    init(name: String, unit: String, type: Storage.ValueType) {
         self.name = name
         self.unit = unit
+        self.type = type
     }
 
     func getName() -> String {
@@ -203,12 +96,24 @@ class StorageValueCollection {
         return unit
     }
     
-    func appendValue(value: CGFloat, date: Date, entry: Int) {
-        if values.map({ value in return value.getEntry() }).contains(entry) {
-            return
+    func getType() -> Storage.ValueType {
+        return type
+    }
+    
+    func setValues(_ values: [StorageValue]) {
+        var isChange = false
+        
+        for value in values {
+            if !self.values.contains(value) {
+                self.values.append(value)
+                isChange = true
+            }
         }
-        values.append(StorageValue(value: value, date: date, entry: entry, col: self))
-        NotificationCenter.default.post(name: Notification.Name("storage.update"), object: nil)
+        
+        // Cập nhật UI khi thay đổi giá trị
+        if isChange {
+            NotificationCenter.default.post(name: Notification.Name("storage.update"), object: nil)
+        }
     }
     
     func getValue(at index: Int? = nil) -> StorageValue? {
@@ -228,6 +133,10 @@ class StorageValueCollection {
         return values.filter { e in
             return valueRange.contains(e.getValue())
         }
+    }
+    
+    func getAllValues() -> [StorageValue] {
+        return values
     }
     
     func getUnloopValues() -> [StorageValue] {
@@ -281,18 +190,13 @@ class StorageValueCollection {
 class StorageValue: Equatable {
     private var value: CGFloat
     private var date: Date
-    private let entry: Int
+    
     weak var col: StorageValueCollection!
     
-    init(value: CGFloat, date: Date, entry: Int, col: StorageValueCollection) {
+    init(value: CGFloat, date: Date, col: StorageValueCollection) {
         self.value = value
         self.date = date
-        self.entry = entry
         self.col = col
-    }
-    
-    func getEntry() -> Int {
-        return entry
     }
     
     func getDate() -> Date {
@@ -308,23 +212,36 @@ class StorageValue: Equatable {
     }
     
     static func == (lhs: StorageValue, rhs: StorageValue) -> Bool {
-        return lhs.value == rhs.value && lhs.date == rhs.date && lhs.entry == rhs.entry
+        return lhs.value == rhs.value && lhs.date == rhs.date
     }
 }
 
 class StorageSetPoint: Equatable {
     private var value: CGFloat
+    private var type: Storage.ValueType
     
-    init(value: CGFloat = 0) {
+    init(value: CGFloat = 0, type: Storage.ValueType) {
         self.value = value
+        self.type = type
     }
     
     func getValue() -> CGFloat {
         return value
     }
     
+    func getType() -> Storage.ValueType {
+        return type
+    }
+    
     func setValue(_ value: CGFloat) {
+        let isChange = abs(value - self.value) > 0.9
+        
         self.value = value
+        
+        // Cập nhật UI khi thay đổi giá trị
+        if isChange {
+            NotificationCenter.default.post(name: Notification.Name("storage.update"), object: nil)
+        }
     }
     
     static func == (lhs: StorageSetPoint, rhs: StorageSetPoint) -> Bool {
