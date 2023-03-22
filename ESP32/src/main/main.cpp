@@ -113,6 +113,11 @@ void backSetpoint() {
 
 // To server
 void postValue() {
+  if (millis() - _time2 < 20000) {
+    return;
+  }
+  _time2 = millis();
+
   DeserializationError error = deserializeJson(stmJSON, json);
 
   if (error) {
