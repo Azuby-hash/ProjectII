@@ -50,7 +50,9 @@
 			"istream": "c",
 			"ostream": "c",
 			"array": "c",
-			"utility": "c"
+			"utility": "c",
+			"string": "c",
+			"string_view": "c"
 		},
 		"stm32-for-vscode.openOCDPath": "/Users/azuby/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/openocd/0.12.0-1.1/.content/bin/openocd",
 		"stm32-for-vscode.armToolchainPath": "/Users/azuby/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/12.2.1-1.2.1/.content/bin",

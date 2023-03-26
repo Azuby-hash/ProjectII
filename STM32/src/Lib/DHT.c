@@ -54,9 +54,14 @@ static uint8_t DHT_Read(DHT_Name* DHT)
 	DHT_SetPinIn(DHT);
 	for(int i = 0; i<8; i++)
 	{
-		while(!DHT_ReadPin(DHT));
 		__HAL_TIM_SET_COUNTER(DHT->Timer,0);
-		while(__HAL_TIM_GET_COUNTER(DHT->Timer)<40);
+		while(!DHT_ReadPin(DHT)) {
+			if (__HAL_TIM_GET_COUNTER(DHT->Timer)>40) {
+				continue;
+			}
+		}
+
+		DHT_DelayUs(DHT, 40);
 		if(!DHT_ReadPin(DHT))
 		{
 			Value &= ~(1<<(7-i));	
@@ -64,7 +69,13 @@ static uint8_t DHT_Read(DHT_Name* DHT)
 		else {
 			Value |= 1<<(7-i);
 		}
-		while(DHT_ReadPin(DHT));
+
+		__HAL_TIM_SET_COUNTER(DHT->Timer,0);
+		while(DHT_ReadPin(DHT)) {
+			if (__HAL_TIM_GET_COUNTER(DHT->Timer)>40) {
+				continue;
+			}
+		}
 	}
 	return Value;
 }
@@ -105,7 +116,7 @@ void DHT_ReadTempHum(DHT_Name* DHT)
 	}		
 	uint16_t timeOut = HAL_GetTick();
 	while(DHT_ReadPin(DHT)){
-		if (HAL_GetTick() - timeOut > 100) {
+		if (HAL_GetTick() - timeOut > 2) {
 			DHT->Status = 0;
 			return;
 		}
