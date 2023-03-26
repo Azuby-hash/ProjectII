@@ -159,7 +159,9 @@ void callBackMain() {
 		}
 		
 		if (HAL_GetTick() - time2 > 2000) {
-			transmitInterval();
+      if (temp > 0.1 && airHum > 0.1 && lightHum > 0.1 && pHHum > 0.1) {
+			  transmitInterval();
+      }
 			
 			time2 = HAL_GetTick();
 		}
@@ -171,7 +173,7 @@ void callBackMain() {
 		}
 
     if (HAL_GetTick() - time3 > 200) {
-      if (tempSP > 0.1 && airHum > 0.1 && lightHum > 0.1 && pHHum > 0.1) {
+      if (temp > 0.1 && airHum > 0.1 && lightHum > 0.1 && pHHum > 0.1) {
         if (temp > tempSP || (airHum > airHumSP && airHum < 1000) || pHHum > pHHumSP || lightHum > lightHumSP) {
           HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         }
